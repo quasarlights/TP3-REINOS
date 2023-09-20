@@ -1,0 +1,7 @@
+#card-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las cards se envuelvan a la siguiente fila */
+    justify-content: flex-start; /* Comienza a llenar desde la izquierda */
+    align-content: flex-start; /* Aliniea las filas desde la parte superior */
+    gap: 10px; /* Espacio entre las cards */
+  }

@@ -1,0 +1,77 @@
+<div class="tab-pane fade show active" id="content3">
+    <!-- getAll || PahtVariable getById -->
+    <!-- GET EMPLEADO -->
+<form>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" [(ngModel)]="mostrarTodasJornadas" name="opcionRadio" value="todos" 
+        id="flexRadioDefault1" (change)="seleccionarTodos($event)" />
+        <label class="form-check-label" for="flexRadioDefault1">
+          Listar todos las jornadas
+        </label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" [(ngModel)]="mostrarJornadaSelect" name="opcionRadio" value=undefined
+        id="flexRadioDefault2" (change)="seleccionarEmpleado($event)" />
+        <label class="form-check-label" for="flexRadioDefault1">
+            Buscar por Empleado y/o Fecha:
+          </label>
+          <div *ngIf="mostrarJornadaSelect">
+        <select
+          class="form-select" aria-label="Disabled select example" [disabled]="!mostrarJornadaSelect"
+           (click)="seleccionarEmpleado($event)" [(ngModel)]="empleadoIdSeleccionado" name="empleadoIdSeleccionado" required>
+           <option disabled selected >Selecciona Empleado</option>
+           <option *ngFor="let empleado of empleados" [value]="empleado.nroDocumento">
+             {{ empleado.nombre }} {{ empleado.apellido }}
+           </option>>
+        </select>
+      
+            <div class="mb-3">
+                <label for="fechaJornada" class="form-label">Fecha</label>
+                <input class="form-control" [(ngModel)]="fechaJornada" type="date" id="fechaJornada" name="fechaJornada">
+                </div>
+        </div>
+     </div>
+      <br />
+      <div class="d-grid gap-2">
+          <button class="btn btn-primary" type="button" (click)="read()">LISTAR JORNADAS</button>
+        <div *ngIf="btnListarComment" >Elige una opción</div>
+      </div>
+      <br>
+      <div *ngIf="mensajeVacio">No hay jornadas para listar</div>
+    <!--CARDS BY FECHA O EMPLEADO-->
+    <br>
+    <div class="d-flex justify-content-center">
+    <div class="col-md-6 text-center" *ngIf="jornadas.length > 0 && !mostrarJornadaSelect">
+        <div *ngFor="let jornada of jornadas" class="card text-bg-primary mb-3 mx-auto" style="max-width: 18rem;">
+          <div class="card-header">{{ jornada.nombreCompleto }}</div>
+          <div class="card-body">
+            <h5 class="card-title">DNI: {{ jornada.nroDocumento }}</h5>
+          <p class="card-text">Concepto: {{ jornada.concepto }}</p>
+          <p class="card-text">Fecha: {{ jornada.fecha }}</p>
+          <p class="card-text" *ngIf="jornada.hsTrabajadas !== undefined">Horas trabajadas: {{ jornada.hsTrabajadas }}</p>
+          </div>
+        </div>
+      </div>
+      <!--CARDS BY FECHA O EMPLEADO-->
+      <br><div class="d-flex justify-content-center">
+        <div class="col-md-6 text-center" *ngIf="jornades.length > 0 && !mostrarTodasJornadas">
+            <div *ngFor="let jornada of jornades" class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-header">{{ jornada.nombreCompleto }}</div>
+                <div class="card-body">
+                <h5 class="card-title">{{ jornada.concepto }}</h5>
+                <p class="card-text">Fecha: {{ jornada.fecha }}</p>
+                <p class="card-text">Horas Trabajadas: {{ jornada.hsTrabajadas }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <!--
+        *ngIf="empleados1.length > 0 && !mostrarEmpleadoSelect"
+        
+        nroDocumento": 32135640,
+    "nombreCompleto": "German Gonzalez",
+    "fecha": "2023-01-01",
+    "concepto": "Turno Normal",
+    "hsTrabajadas": 6-->

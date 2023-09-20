@@ -1,0 +1,6 @@
+export interface JornadaRequestOne {
+    idEmpleado: number,
+    idConcepto: number,
+    fecha: string
+
+}

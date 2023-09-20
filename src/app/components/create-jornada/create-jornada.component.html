@@ -1,0 +1,55 @@
+<div class="tab-content card-body">
+    <div class="tab-pane fade show active" id="content2">
+        <!--Param: empleadoId
+            {
+                export interface Jornada {
+                idJornada: number,
+                nroDocumento: number,
+                nombreCompleto: string,
+                fecha: Date,
+                concepto: string,
+                hsTrabajadas: number
+            }
+
+            } -->
+            <!-- UPDATE EMPLEADO -->
+        <form>                        
+            <div class="mb-3">
+                <label for="empleadoSelected" class="form-label">Seleccionar empleado:</label>
+                <select class="form-select" aria-label="Disabled select example" 
+                [(ngModel)]="empleadoIdSeleccionado"  name="empleadoSeleccion" required>
+                    <option value="" disabled selected>Selecciona Empleado</option>
+                    <option *ngFor="let empleado of empleados" [value]="empleado.id">
+                        {{ empleado.nombre }} {{empleado.apellido}}
+                      </option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="conceptoSelected" class="form-label">Seleccionar concepto:</label>
+                <select class="form-select" aria-label="Disabled select example" 
+                [(ngModel)]="conceptoIdSeleccionado"  name="conceptoSeleccion" required
+                (change)="esDiaLibre($event)">
+                    <option value="0" disabled selected>Selecciona Empleado</option>
+                    <option *ngFor="let concepto of conceptos" [value]="concepto.id">
+                        {{ concepto.nombre }}
+                      </option>
+                </select>
+            <div class="mb-3">
+               <label for="fechaJornada" class="form-label">Fecha</label>
+               <input [(ngModel)]="fechaJornada" type="date" id="fechaJornada" name="fechaJornada">
+               </div>
+            </div>
+            <div class="mb-3" *ngIf="notConceptoDiaLibre">
+                <label for="nroDocumento" class="form-label">Cantidad de horas Trabajadas:</label>
+                <input type="text" class="form-control" id="horasTrabajadas" name="horasTrabajadas" 
+                (input)="soloNumeros($event)" required [disabled]="horasDisabled || conceptoIdSeleccionado == 3"
+                *ngIf="notConceptoDiaLibre">
+                <div class="invalid-feedback">Por favor, ingrese solo números.</div>
+                <div class="invalid-message" *ngIf="mostrarMensaje">Solo se permiten números.</div>
+             </div>    
+            <div class="d-grid gap-2">
+               <button class="btn btn-primary" type="button" (click)="crearJornada()">CREAR JORNADA</button>
+            </div>
+        </form>
+            </div>
+           

@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-underline card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#content1" aria-current="page">Crear Empleado</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="tab2" data-bs-toggle="tab" href="#content2" aria-current="page">Actualizar Empleado</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="tab3" data-bs-toggle="tab" href="#content3" aria-current="page">Listar Empleado/s</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="tab4" data-bs-toggle="tab" href="#content4" aria-current="page">Baja Empleado</a>
+                </li>                    
+            </ul>
+        </div>
+        <div class="tab-content card-body">
+            <div class="tab-pane fade show active" id="content1">
+                <app-create-empleado></app-create-empleado>
+            </div>
+            <div class="tab-pane fade" id="content2">
+                <app-update-empleado></app-update-empleado>
+            </div>
+            <div class="tab-pane fade" id="content3">
+                <app-read-empleado></app-read-empleado>
+            </div>
+            <div class="tab-pane fade" id="content4">
+                <app-delete-empleado></app-delete-empleado>
+            </div>
+        </div>
+    </div>
+</div>

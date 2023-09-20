@@ -1,0 +1,78 @@
+<div class="tab-pane fade show active" id="content3">
+  <!-- getAll || PahtVariable getById -->
+  <!-- GET EMPLEADO -->
+  <form>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        [(ngModel)]="mostrarTodosEmpleados"
+        name="opcionRadio"
+        value="todos"
+        id="flexRadioDefault1"
+        (change)="onRadioSeleccionado('todos')"  (change)="seleccionarTodos($event)"
+      />
+      <label class="form-check-label" for="flexRadioDefault1">
+        Listar todos los Empleados
+      </label>
+    </div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        [(ngModel)]="mostrarEmpleadoSelect"
+        name="opcionRadio"
+        value="empleado"
+        id="flexRadioDefault2"
+        (change)="onRadioSeleccionado('empleado')"
+      />
+      <label class="form-check-label" for="flexRadioDefault2">
+        Listar información del Empleado:
+      </label>
+      <div *ngIf="mostrarEmpleadoSelect">
+        <select
+          class="form-select" aria-label="Disabled select example" [disabled]="!mostrarEmpleadoSelect"
+          (change)="seleccionarEmpleado($event)" required>
+          <option value="-1" selected>Selecciona Empleado</option>
+          <option *ngFor="let empleado of empleados" [value]="empleado.id">
+            {{ empleado.nombre }} {{ empleado.apellido }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <br />
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" (click)="read()">LISTAR</button>
+      <div *ngIf="btnListarComment">Elige una opción</div>
+    </div>
+  </form>
+  <br>
+  <div class="row">
+    <div class="d-flex justify-content-center">
+    <div class="col-md-6 text-center" *ngIf="empleado.id != 0 && !mostrarTodosEmpleados" class="card text-bg-primary mb-3" style="max-width: 18rem;">
+      
+      <div class="card-header">{{ empleado.nombre }} {{empleado.apellido}}</div>
+      <div class="card-body">
+        <h5 class="card-title">DNI: {{ empleado.nroDocumento }}</h5>
+        <p class="card-text">Email: {{ empleado.email }}</p>
+        <p class="card-text">Fecha de Nacimiento: {{ empleado.fechaNacimiento }}</p>
+        <p class="card-text">Fecha de Ingreso: {{ empleado.fechaIngreso }}</p>
+        <p class="card-text">Fecha de Creacion: {{ empleado.fechaCreacion }}</p>
+      </div>
+    </div>
+    <div class="col-md-6 text-center" *ngIf="empleados1.length > 0 && !mostrarEmpleadoSelect">
+      <div *ngFor="let empleado of empleados" class="card text-bg-primary mb-3 mx-auto" style="max-width: 18rem;">
+        <div class="card-header">{{ empleado.nombre }} {{ empleado.apellido }}</div>
+        <div class="card-body">
+          <h5 class="card-title">DNI: {{ empleado.nroDocumento }}</h5>
+        <p class="card-text">Email: {{ empleado.email }}</p>
+        <p class="card-text">Fecha de Nacimiento: {{ empleado.fechaNacimiento }}</p>
+        <p class="card-text">Fecha de Ingreso: {{ empleado.fechaIngreso }}</p>
+        <p class="card-text">Fecha de Creacion: {{ empleado.fechaCreacion }}</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

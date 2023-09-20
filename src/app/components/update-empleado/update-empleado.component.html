@@ -1,0 +1,72 @@
+<div class="tab-content card-body">
+    <div class="tab-pane fade show active" id="content2">
+        <!--Param: empleadoId
+            {
+                "nroDocumento": 123,
+                "nombre": "Juan",
+                "apellido": "Len",
+                "email": "johnlennon@gmail.com",
+                "fechaNacimiento": "1940-10-09",
+                "fechaIngreso": "1961-02-09",
+                "fechaCreacion": "2023-09-09T23:48:38.056364"
+            } -->
+            <!-- UPDATE EMPLEADO -->
+        <form>                        
+            <div class="mb-3">
+                <label for="empleadoSelected" class="form-label">Seleccionar Empleado a Actualizar:</label>
+                <select class="form-select" aria-label="Disabled select example" 
+                [(ngModel)]="empleadoIdSeleccionado" (change)="cargarEmpleado()" name="empleadoSeleccion" required>
+                    <option value="" disabled selected>Selecciona Empleado</option>
+                    <option *ngFor="let empleado of empleados" [value]="empleado.id">
+                        {{ empleado.nombre }} {{ empleado.apellido }}
+                      </option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="nroDocumento" class="form-label">Numero de Documento</label>
+                <input type="number" class="form-control" id="nroDocumento" name="nroDocumento"
+                    [(ngModel)]="empleadoSeleccionado.nroDocumento" (input)="soloNumeros($event)" required>
+                <div class="invalid-message text-danger" *ngIf="mostrarMensaje">Solo se permiten números.</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" 
+                [(ngModel)]="empleadoSeleccionado.nombre" (input)="soloLetras($event)" required>
+                <div class="invalid-message text-danger" *ngIf="mostrarMensajeNombre">Solo se permiten letras</div>
+            </div>
+            <div class="mb-3">
+                <label for="surname" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="surname" name="surname"
+                [(ngModel)]="empleadoSeleccionado.apellido" (input)="soloLetras($event)" required>
+                <div class="invalid-message text-danger" *ngIf="mostrarMensajeApellido">Solo se permiten letras</div>
+            </div>
+            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="empleadoSeleccionado.email" 
+            (input)="validarEmail(empleadoSeleccionado.email)" required>
+                <div class="invalid-message text-danger" *ngIf="empleadoSeleccionado.email && !validarEmail(empleadoSeleccionado.email)">
+                    Correo electrónico inválido.
+                </div>
+                <div class="mb-3">
+                    <label for="birthDay" class="form-label">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" id="birthDay" name="birthDay"
+                      [(ngModel)]="empleadoSeleccionado.fechaNacimiento" max="{{ maxDate }}" 
+                      (input)="validarFechaNacimiento(empleadoSeleccionado.fechaNacimiento)" required>
+                    <div class="invalid-message text-danger" *ngIf="mostrarMensajeFechaNacimiento">Debe tener al menos 18 años de edad.</div>
+                  </div>
+                  
+                  
+            <div class="mb-3">
+                <label for="admissionDay" class="form-label">Fecha de Ingreso</label>
+                    <input type="date" class="form-control" id="admissionDay" name="admissionDay"
+                    [(ngModel)]="empleadoSeleccionado.fechaIngreso" (input)="validarFechaAdmision($event)" 
+                    max="{{ maxDate | date:'yyyy-MM-dd' }}" required>
+                <div class="invalid-message text-danger" *ngIf="mostrarMensajeFechaAdmision">
+                    La fecha de ingreso no puede ser posterior al día de la fecha.
+                </div>    
+            </div>        
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="button" (click)="actualizarEmpleado()" >ACTUALIZAR EMPLEADO</button>
+            </div>
+        </form>
+    </div>
+</div>

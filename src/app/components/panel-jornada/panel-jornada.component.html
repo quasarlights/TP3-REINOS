@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-underline card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#content5" aria-current="page">Crear Jornada</a>
+                <!-- <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#content1" aria-current="page">Crear Empleado</a> -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="tab2" data-bs-toggle="tab" href="#content6" aria-current="page">Listar Jornadas</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content card-body">
+            <div class="tab-pane fade show active" id="content5">
+                <app-create-jornada></app-create-jornada>
+            </div>
+            <div class="tab-pane fade" id="content6">
+                <app-read-jornada></app-read-jornada>
+            </div>
+        </div>
+    </div>
+</div>
